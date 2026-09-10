@@ -27,7 +27,7 @@ app.post('/login', (req, res) => {
   const token = jwt.sign(
     { sub: demoUser.id, username: demoUser.username, role: demoUser.role },
     jwtSecret,
-    { expiresIn: '1h' },
+    { algorithm: 'HS256', expiresIn: '1h' },
   );
   return res.json({ token });
 });
@@ -42,7 +42,7 @@ app.get('/profile', (req, res) => {
   }
 
   try {
-    const claims = jwt.verify(token, jwtSecret);
+    const claims = jwt.verify(token, jwtSecret, { algorithms: ['HS256'] });
     return res.json({
       id: claims.sub,
       username: claims.username,
