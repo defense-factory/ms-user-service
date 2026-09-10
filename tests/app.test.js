@@ -3,6 +3,7 @@ jest.mock('axios');
 const request = require('supertest');
 const axios = require('axios');
 const app = require('../src/app');
+const { mergeRequestOptions } = require('../src/options');
 
 describe('ms-user-service', () => {
   test('health returns 200', async () => {
@@ -34,7 +35,7 @@ describe('ms-user-service', () => {
   });
 
   test('merges request options with lodash defaults', () => {
-    expect(app.mergeRequestOptions({ headers: { 'X-Demo': 'true' } })).toEqual({
+    expect(mergeRequestOptions({ headers: { 'X-Demo': 'true' } })).toEqual({
       timeout: 2000,
       headers: {
         Accept: 'application/json',

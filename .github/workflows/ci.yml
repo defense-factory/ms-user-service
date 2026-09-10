@@ -15,7 +15,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - uses: aquasecurity/trivy-action@master
+      - uses: aquasecurity/trivy-action@0.30.0
         with:
           scan-type: fs
           scan-ref: .

@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-const _ = require('lodash');
+const { mergeRequestOptions } = require('./options');
 
 const app = express();
 app.use(express.json());
@@ -13,16 +13,6 @@ const demoUser = {
   role: 'customer',
 };
 const jwtSecret = process.env.JWT_SECRET || 'demo-only-secret';
-
-function mergeRequestOptions(options = {}) {
-  return _.merge(
-    {
-      timeout: 2000,
-      headers: { Accept: 'application/json' },
-    },
-    options,
-  );
-}
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
@@ -74,4 +64,3 @@ app.get('/inventory', async (req, res) => {
 });
 
 module.exports = app;
-module.exports.mergeRequestOptions = mergeRequestOptions;
