@@ -42,7 +42,7 @@ app.get('/profile', (req, res) => {
   }
 
   try {
-    const claims = jwt.verify(token, jwtSecret);
+    const claims = jwt.verify(token, jwtSecret, { algorithms: ['HS256'] });
     return res.json({
       id: claims.sub,
       username: claims.username,
